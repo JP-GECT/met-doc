@@ -13,7 +13,7 @@ const PORT = 8000;
 app.use('/transcribe', transcribe);
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
-app.use('/createnewproject', create_new_project)
+app.use('/data', create_new_project)
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

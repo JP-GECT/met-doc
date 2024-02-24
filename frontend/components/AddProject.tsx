@@ -53,7 +53,7 @@ export function AddProject({ text }: AddProjectProps) {
       //     // body: JSON.stringify(data),
       //   }
       // );
-      const response = await fetch("http://localhost:8000/createnewproject", {
+      const response = await fetch("http://localhost:8000/data/create-new-project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
