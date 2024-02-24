@@ -20,7 +20,7 @@ The json results must be clear and no need for unwanted adjectives`
 
 }
 
-const text2json = (text) => {
+const text2json = async (text) => {
     try{
         const prompt = addPromptToText(text)
         const openai = new OpenAI({
@@ -40,4 +40,4 @@ const text2json = (text) => {
     }
 }
 
-
+module.exports = text2json;

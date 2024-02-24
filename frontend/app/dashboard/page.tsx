@@ -14,13 +14,15 @@ interface SidebarProps {
 const page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [projects, setProjects] = useState<any>([]);
-  const action = () => {
-    setProjects([...projects, "new project"]);
-  };
+  // const action = () => {
+  //   setProjects([...projects, "new project"]);
+  // };
   return (
-    <div className=" min-h-screen w-[100%] flex justify-center items-center">
-      <AddProject action={action} />
-    </div>
+    // <div className=" min-h-screen w-[100%] flex justify-center items-center">
+    //   {/* <AddProject action={action} /> */}
+    //   <AddProject />
+    // </div>
+    <></>
   );
 };
 export default page;
