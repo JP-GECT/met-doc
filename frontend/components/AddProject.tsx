@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -27,6 +27,7 @@ interface AddProjectProps {
 
 // export default function AddProject({ text }: AddProjectProps) {
 const AddProject = ({ text }: AddProjectProps) => {
+  const router = useRouter();
   const [data, setData] = useState<any>({
     name: "",
     description: "",
@@ -38,8 +39,6 @@ const AddProject = ({ text }: AddProjectProps) => {
   };
 
   const handleSave = async () => {
-    const router = useRouter();
-    router.push("/");
     // const formData = new FormData();
     // formData.append("name", data.name);
     // formData.append("description", data.description);
@@ -69,6 +68,8 @@ const AddProject = ({ text }: AddProjectProps) => {
       console.log("Project created:");
       console.log(response);
       console.log(typeof response);
+      // const id = response._id;
+      // router.push(`/dashboard/${id}`);
     } catch (error) {
       console.error("Error creating project:", error);
     }
