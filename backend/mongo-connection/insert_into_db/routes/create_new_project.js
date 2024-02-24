@@ -7,10 +7,9 @@ const app = express();
 const router = express.Router()
 
 router.post('/',(req,res)=>{
-    console.log(req)
     try{
-        const body = req.data;
-    console.log(body)
+        const bo = req.body
+    console.log(bo)
     }catch(err){
         console.error(err)
     }
