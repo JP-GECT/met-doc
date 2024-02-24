@@ -7,20 +7,21 @@ const Project = require('../models/Project.js');
 //error :TypeError: Cannot read properties of undefined (reading 'project_name') because of data is not defined
 async function mongo_connection(data) {
   try {
-      // await mongoose.connect('mongodb://127.0.0.1:27017/metdoc');
-      // const article = new Project({
-      //   project_name: data.project_name,
-      //   project_description: data.project_description,
-      //   team_leader: data.team_leader,
-      //   tasks: data.tasks,
-      //   assigned: data.assigned,
-      //   issues: data.issues,
-      //   summary: data.summary,
-      //   scope: data.scope,
-      //   estimated_cost: data.estimated_cost,
-      //   risk: data.risks
-      // });
-      // await article.save();
+      await mongoose.connect('mongodb://127.0.0.1:27017/metdoc');
+      const article = new Project({
+        // project_name: 'project 1',
+        // project_description: data.project_description,
+        // team_leader: data.team_leader,
+        tasks: data.tasks,
+        assigned: data.assigned,
+        issues: data.issues,
+        summary: data.summary,
+        scope: data.scope,
+        estimated_cost: data.estimated_cost,
+        risk: data.risks
+      });
+      await article.save();
+      console.log(article)
       console.log('connected')
 
     

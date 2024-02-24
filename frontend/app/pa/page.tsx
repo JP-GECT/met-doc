@@ -17,7 +17,7 @@ const UploadForm: React.FC = () => {
     };
 
     const handleSubmit = async (event: any) => {
-        // event.preventDefault();
+        event.preventDefault();
 
         if (!file) {
             console.error('No file selected');

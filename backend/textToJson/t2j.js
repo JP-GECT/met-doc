@@ -24,7 +24,8 @@ const text2json = async (text) => {
     try{
         const prompt = addPromptToText(text)
         const openai = new OpenAI({
-            apiKey : process.env.OPENAI_API_KEY
+            // apiKey : process.env.OPENAI_API_KEY    
+            apiKey: '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'  
         });
         const response = await openai.completions.create({
             model: 'gpt-3.5-turbo-instruct',

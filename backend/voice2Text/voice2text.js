@@ -5,13 +5,16 @@ const fs = require('fs');
 const FormData = require('form-data')
 const path = require('path');
 const cors = require('cors');
+const mongo_connection = require('../mongo-connection/mongo-connection.js')
+
 
 const text2json  = require('../textToJson/t2j.js')
     
 const app = express();
 app.use(cors())
 
-const api_key = process.env.OPENAI_API_KEY
+// const api_key = process.env.OPENAI_API_KEY
+const api_key = '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'
 
 const router = express.Router()
 
@@ -74,7 +77,8 @@ router.post('/', async (req, res) => {
         .then(async (result) => {
             try{
             const textFromOpenAI = await text2json(result.data.text)
-            console.log(textFromOpenAI)
+            console.log(typeof textFromOpenAI.choices[0].text)
+            mongo_connection(textFromOpenAI.choices[0].text)
             //console.log(result.data.text);
             }
             catch (err){
