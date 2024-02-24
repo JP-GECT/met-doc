@@ -30,12 +30,9 @@ const page = ({ params }: { params: { id: String } }) => {
           <div>
             <SemiCircleChart />
           </div>
-          <div className="mt-10 max-w-[60%] rounded-2xl">
-            {/* <h2>Progress</h2> */}
-            {/* <ProgressBar /> */}
-          </div>
+          <div className="mt-10 max-w-[60%] rounded-2xl"></div>
         </div>
-        {/* <div className="flex-1"></div> */}
+        {/* <ProjectTasks /> */}
       </div>
       <div></div>
     </div>
