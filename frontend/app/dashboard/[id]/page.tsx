@@ -11,12 +11,12 @@ import SemiCircleChart from "@/components/SemiCircleChart";
 import BudgetCard from "@/components/BudgetCard";
 import DateCard from "@/components/DateCard";
 import NewProject from "@/components/pages/NewProject";
-
+import { TableDemo } from "@/components/TaskTable";
 const page = async ({ params }: { params: { id: String } }) => {
-  const project = projects.find((project) => project.id === +params.id);
+  // const project = projects.find((project) => project.id === +params.id);
 
   const pr = await getProject(params.id);
-
+  console.log(pr)
   if (pr.isError) {
     return <div>Error</div>;
   }
@@ -24,12 +24,13 @@ const page = async ({ params }: { params: { id: String } }) => {
   if (pr.isNew) {
     return <NewProject />;
   }
+  const project = pr.data
 
   return (
-    <div className="flex flex-col w-[100%] gap-5 max-h-screen overflow-y-scroll">
+    <div className="flex flex-col w-[100%] gap-5 max-h-screen overflow-y-scroll bg-[#624bff]">
       <div>
         <div className="flex justify-between items-center my-8 font-bold mx-5 px-5">
-          <span className="text-3xl">{project?.name}</span>
+          <span className="text-3xl text-black">{project?.project_name}</span>
           <UploadAudio />
         </div>
         <div className="min-h-[15vh] flex gap-3 mb-5">
@@ -37,12 +38,13 @@ const page = async ({ params }: { params: { id: String } }) => {
         </div>
       </div>
       <div className="px-5 flex flex-col gap-5">
-        <div className="flex justify-between items-center">
+        {/* <div className="flex justify-between items-center">
           <SemiCircleChart />
           <BudgetCard cost={dummy.estimated_cost} />
           <DateCard end_date={dummy?.scope?.end_date} />
-        </div>
-        <ProjectTasks />
+        </div> */}
+        {/* <ProjectTasks /> */}
+        <TableDemo />
 
         <div className="flex gap-4">
           <div className="flex-1">

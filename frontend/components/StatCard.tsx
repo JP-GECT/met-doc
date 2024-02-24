@@ -16,7 +16,7 @@ interface StatCardProps {
 
 const StatCard = ({ title, description, content, footer }: StatCardProps) => {
   return (
-    <Card className="min-w-[20vw]">
+    <Card className="min-w-[18vw] h-[26vh] pb-2 ">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>

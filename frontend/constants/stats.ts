@@ -38,4 +38,10 @@ export const project_stats = [
     content: "5",
     footer: "View Members",
   },
+  {
+    title: "Deadline",
+    description: "Expected deadline",
+    content: "28-02-2024",
+    footer: "3 days left",
+  },
 ];

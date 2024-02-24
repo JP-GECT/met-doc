@@ -4,7 +4,7 @@ import { project_stats } from "@/constants/stats";
 
 const Stats = () => {
   return (
-    <div className="flex gap-5 justify-around w-full">
+    <div className="flex gap-1 justify-around w-full">
       {project_stats.map((stat: any) => (
         <StatCard
           key={stat.title}

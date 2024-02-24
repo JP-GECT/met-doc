@@ -26,7 +26,7 @@ const Sidebar = async ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-9999 flex h-screen w-72 flex-col overflow-y-hidden bg-[#212b36] duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -67,8 +67,8 @@ const Sidebar = async ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             key={project.id}
             className="flex flex-col start justify-between px-6 py-3 text-white hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer"
           >
-            <Link href={`/dashboard/${project.id}`}>{project.name}</Link>
-            <span className="text-sm text-gray-400">{project.description}</span>
+            <Link href={`/dashboard/${project._id}`}>{project.project_name}</Link>
+            <span className="text-sm text-gray-400">{project.project_description}</span>
           </div>
         ))}
       </div>

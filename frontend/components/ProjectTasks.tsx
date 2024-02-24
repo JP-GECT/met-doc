@@ -12,7 +12,7 @@ const ProjectTasks = () => {
   const assigned_tasks = dummy.assigned;
 
   return (
-    <div className="flex flex-col border-green-300 border-4 py-4">
+    <div className="flex flex-col py-4 bg-white drop-shadow-2xl rounded-lg">
       <h2 className="font-bold text-2xl text-center">Tasks</h2>
       <Accordion
         type="single"
