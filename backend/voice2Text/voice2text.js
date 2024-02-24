@@ -1,11 +1,15 @@
+const express = require('express')
+
 const axios = require('axios');
 const multer = require('multer');
 const fs = require('fs');
 const FormData = require('form-data')
 
-const app = express();
 
 const api_key = process.env.OPENAI_API_KEY
+
+const router = express.Router()
+
 // Multer configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -18,55 +22,66 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
+router.get("/wiki", function (req, res) {
+  res.send("Wiki home page");
+});
+
 // Express route to handle file upload and API request
-app.post('/transcribe', upload.single('file'), async (req, res) => {
-  try {
-    const file = req.file;
-    res.send("file recieved successfully")
-    const model = req.body.model || 'whisper-1';
+router.post('/', upload.single('file'), async (req, res) => {
+    try {
+        const file = req.file;
+        res.send("file recieved successfully")
 
-    if (!file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+        if (!FileExists(file)) {
+            return res.status(400).json({ error: 'No file uploaded' });
+        }
+
+        const config = CreateConfig(file.path)
+
+        axios(config)
+        .then(result => {
+            console.log('Response:', result.data);
+        })
+        .catch(error => {
+            console.error('Error:', error.response.data);
+        });
+    } 
+    catch (error) {
+        console.error('Error:', error.response ? error.response.data : error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
+});
 
-    // Read the uploaded file
-    const audioData = fs.readFileSync(file.path);
+const FileExists = (file) => {
+    if (!file)
+        return false
+    return true
+}
+
+const CreateConfig = (filePath) => {
+    const audioData = fs.readFileSync(filePath);
     console.log(typeof audioData)
 
     const formData = new FormData();
     formData.append('file', audioData,{filename:'harvard.wav'});
     formData.append('model','whisper-1');
+    const config = {
+    method: 'post',
+    url: 'https://api.openai.com/v1/audio/transcriptions',
 
-    // Make API request to OpenAI
-const config = {
-  method: 'post',
-  url: 'https://api.openai.com/v1/audio/transcriptions',
-  headers: {
-    'Authorization': `Bearer ${api_key}`,
-    ...formData.getHeaders() // Set Content-Type header to match form-data
-  },
-  data: formData
-};
+    headers: {
+        'Authorization': `Bearer ${api_key}`,
+        ...formData.getHeaders() // Set Content-Type header to match form-data
+    },
+    data: formData
+    };
+    return config
+}
 
-// Send the request
-axios(config)
-  .then(res => {
-    console.log('Response:', res.data);
-  })
-  .catch(error => {
-    console.error('Error:', error.response.data);
-  });
+module.exports = router
 
-    // Respond with the API response
-   // res.json(response.data);
-  } catch (error) {
-    console.error('Error:', error.response ? error.response.data : error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+
 
 
