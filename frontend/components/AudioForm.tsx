@@ -2,8 +2,12 @@
 
 import { useState } from "react";
 
-const AudioForm = () => {
-  const [file, setFile] = useState(null);
+interface AudioFormProps {
+  setFile: (file: any) => void;
+}
+
+const AudioForm = ({ setFile }: AudioFormProps) => {
+  // const [file, setFile] = useState(null);
 
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
@@ -13,7 +17,7 @@ const AudioForm = () => {
     e.preventDefault();
     // const formData = new FormData();
     // formData.append("audio", file);
-    console.log(file);
+    // console.log(file);
 
     // try {
     //   const response = await fetch("/api/upload", {
@@ -29,13 +33,13 @@ const AudioForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <input
         type="file"
         onChange={handleFileChange}
-        // onChange={(e) => setFile(e.target.files[0])}
+        className=""
       />
-      <button type="submit">Upload</button>
+      {/* <button type="submit">Upload</button> */}
     </form>
   );
 };
