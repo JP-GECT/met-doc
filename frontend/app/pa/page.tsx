@@ -29,11 +29,11 @@ const UploadForm: React.FC = () => {
         formData.append('text', text);
 
         try {
-            await axios.post('http://localhost:3001/upload', formData, {
+            await axios.post('http://localhost:8000/transcribe', formData,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            });
+            } );
             console.log('File uploaded successfully');
             // Optionally, you can perform some action after successful upload
         } catch (error) {
