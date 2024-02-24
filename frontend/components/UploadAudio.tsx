@@ -54,11 +54,15 @@ const UploadAudio = () => {
     //   console.log("Here");
     // }
     try {
-      await axios.post("http://localhost:3001/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3001/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log("File uploaded successfully");
       // Optionally, you can perform some action after successful upload
     } catch (error) {

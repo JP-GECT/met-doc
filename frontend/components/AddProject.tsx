@@ -37,13 +37,22 @@ export function AddProject({ text }: AddProjectProps) {
   };
 
   const handleSave = async () => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("team_leader", data.team_leader);
     try {
-      const response = await axios.post("http://localhost:3001/create", {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await axios.post(
+        "http://localhost:3001/create",
+        formData,
+        {
+          headers: {
+            // "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data",
+          },
+          // body: JSON.stringify(data),
+        }
+      );
       console.log("Project created:", response);
       console.log(response);
       console.log(typeof response);
