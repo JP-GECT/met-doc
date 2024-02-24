@@ -3,7 +3,7 @@
 import axios from "axios";
 
 import { useState } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Mic } from "lucide-react";
 
 import {
   Dialog,
@@ -54,11 +54,15 @@ const UploadAudio = () => {
     //   console.log("Here");
     // }
     try {
-      await axios.post("http://localhost:3001/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3001/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log("File uploaded successfully");
       // Optionally, you can perform some action after successful upload
     } catch (error) {
@@ -71,13 +75,14 @@ const UploadAudio = () => {
       <DialogTrigger asChild>
         {/* <Button variant="outline">Upload Audio</Button> */}
         <Button
-          variant="outline"
-          className="rounded-full flex gap-2"
+          variant="ghost"
+          className="rounded-full p-3 border-none"
         >
           {/* <ChevronUp /> */}
           {/* <ArrowUpSquare /> */}
-          <ArrowUp />
-          Upload Audio
+          {/* <ArrowUp /> */}
+          <Mic className="h-16 w-16" />
+          {/* Upload Audio */}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -87,20 +92,6 @@ const UploadAudio = () => {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            {/* <Label
-              htmlFor="name"
-              className="text-right"
-            >
-              Name
-            </Label>
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label
-              htmlFor="username"
-              className="text-right"
-            >
-              Username
-            </Label> */}
             <AudioForm setFile={setFile} />
           </div>
         </div>
@@ -109,9 +100,6 @@ const UploadAudio = () => {
             <Button
               variant="ghost"
               type="submit"
-              // onClick={(e: any) => {
-              //   console.log(file);
-              // }}
               onClick={handleUpload}
               // onSubmit={handleUpload}
             >
