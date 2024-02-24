@@ -1,15 +1,16 @@
-"use client";
+// "use client";
 
 import Link from "next/link";
 import { useRef } from "react";
 
+import { projects } from "@/constants/projects";
+
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
-  projects: any;
 }
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen, projects }: SidebarProps) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const sidebar = useRef<any>(null);
   const trigger = useRef<any>(null);
 
@@ -47,15 +48,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, projects }: SidebarProps) => {
       {/* ============================ Sidebar topics============================ */}
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
-        <div className="flex flex-col start justify-between px-6 py-3 text-white hover:bg-gray-700 dark:hover:bg-gray-600">
+        {/* <div className="flex flex-col start justify-between px-6 py-3 text-white hover:bg-gray-700 dark:hover:bg-gray-600">
           <span>Project1</span>
           <span className="text-sm text-gray-400">description</span>
-        </div>
+        </div> */}
 
         {projects.map((project: any) => (
-          <div className="flex flex-col start justify-between px-6 py-3 text-white hover:bg-gray-700 dark:hover:bg-gray-600">
-            <span>{project}</span>
-            <span className="text-sm text-gray-400">description</span>
+          <div
+            key={project.id}
+            className="flex flex-col start justify-between px-6 py-3 text-white hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer"
+          >
+            <Link href={`/dashboard/${project.id}`}>{project.name}</Link>
+            <span className="text-sm text-gray-400">{project.description}</span>
           </div>
         ))}
       </div>
