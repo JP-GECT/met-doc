@@ -28,7 +28,7 @@ const UploadAudio = () => {
     console.log(file);
 
     try {
-      const response = await fetch("http://localhost:8000/transcribe", {
+      const response = await fetch("http://localhost:8000/trans", {
         method: "POST",
         // headers: {
         //   "Content-Type": "application/json",
