@@ -14,7 +14,7 @@ const app = express();
 app.use(cors())
 
 // const api_key = process.env.OPENAI_API_KEY
-const api_key = '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'
+const api_key = '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'
 
 const router = express.Router()
 

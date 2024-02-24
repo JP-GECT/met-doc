@@ -7,12 +7,12 @@ const projectSchema = new Schema({
   project_description: String,
   team_leader: String,
   tasks:[String],
-  assigned:{
-    assigned_to:String,
-    task_name:String,
+  assigned:[{
+    name:String,
+    task:String,
     constraints:String,
-    time_estimation:String,
-  },
+    "time estimate":String,
+  }],
   issues:[String],
   summery: String,
   scope:{
