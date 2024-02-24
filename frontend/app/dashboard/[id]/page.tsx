@@ -1,11 +1,13 @@
 import { projects } from "@/constants/projects";
-// import { dummy } from "@/constants/dummy";
+import { dummy } from "@/constants/dummy";
 
 import UploadAudio from "@/components/UploadAudio";
 import ProjectStats from "@/components/ProjectStats";
 import ProjectTasks from "@/components/ProjectTasks";
 import ProjectIssues from "@/components/ProjectIssues";
 import SemiCircleChart from "@/components/SemiCircleChart";
+import BudgetCard from "@/components/BudgetCard";
+import DateCard from "@/components/DateCard";
 
 const page = ({ params }: { params: { id: String } }) => {
   const project = projects.find((project) => project.id === +params.id);
@@ -22,17 +24,23 @@ const page = ({ params }: { params: { id: String } }) => {
         </div>
       </div>
       <div className="px-5 flex flex-col gap-5">
-        <SemiCircleChart />
+        <div className="flex justify-between items-center">
+          <SemiCircleChart />
+          <BudgetCard cost={dummy.estimated_cost} />
+          <DateCard end_date={dummy?.scope?.end_date} />
+        </div>
         <ProjectTasks />
 
         <div className="flex gap-4">
-          <div>
+          <div className="flex-1">
             <ProjectIssues />
           </div>
-          <div>
-            <SemiCircleChart />
+          <div className="flex-1">
+            {/* <SemiCircleChart /> */}
+            <h1 className="text-xl font-bold">Summary</h1>
+            <p>{dummy.summary}</p>
           </div>
-          <div className="mt-10 max-w-[60%] rounded-2xl"></div>
+          <div className="mt-10 max-w-[50%] rounded-2xl"></div>
         </div>
         {/* <ProjectTasks /> */}
       </div>
