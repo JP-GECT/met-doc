@@ -3,16 +3,25 @@
 import Link from "next/link";
 import { useRef } from "react";
 
-import { projects } from "@/constants/projects";
+// import { projects } from "@/constants/projects";
+import { getProjectList } from "@/constants/getProjectList";
 
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
 }
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+const Sidebar = async ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const sidebar = useRef<any>(null);
   const trigger = useRef<any>(null);
+
+  const response = await getProjectList();
+
+  if (response.isError) {
+    return <div>Error</div>;
+  }
+
+  const projects = response.data;
 
   return (
     <aside
