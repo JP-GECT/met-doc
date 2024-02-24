@@ -3,44 +3,82 @@ const axios = require('axios');
 const multer = require('multer');
 const fs = require('fs');
 const FormData = require('form-data')
+const path = require('path');
+const cors = require('cors');
+const mongo_connection = require('../mongo-connection/mongo-connection.js')
+
 
 const text2json  = require('../textToJson/t2j.js')
     
+const app = express();
+app.use(cors())
 
-
-const api_key = process.env.OPENAI_API_KEY
+// const api_key = process.env.OPENAI_API_KEY
+const api_key = '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'
 
 const router = express.Router()
 
 // Multer configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './uploads');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './uploads');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   }
+// });
 
-const upload = multer({ storage: storage });
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // specify the destination folder
+    },
+    filename: function (req, file, cb) {
+        // generate a unique name for the file
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+//-------------------------
+// const upload = multer({ storage: storage });
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 10 * 1024 * 1024 } // set the file size limit (in this case, 10MB)
+}).single('audioFile'); // name attribute of the file input field
+
+
+
+// Middleware to parse JSON and urlencoded form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Express route to handle file upload and API request
-router.post('/', upload.single('file'), async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const file = req.file;
-        res.send("file recieved successfully")
-
-        if (!FileExists(file)) {
-            return res.status(400).json({ error: 'No file uploaded' });
-        }
-
-        const config = CreateConfig(file.path)
-
-        axios(config)
+        upload(req, res, (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Error uploading file.');
+            }
+            
+            // File uploaded successfully
+            const file = req.file;
+            const text = req.body.text;
+            console.log('Uploaded file:', file);
+            console.log('Text:', text);
+    
+            // Here you can handle the uploaded file and text
+            // For example, you can save the file to a database along with the text
+            
+            res.send('File uploaded successfully.');
+            if (!FileExists(file)) {
+                return res.status(400).json({ error: 'No file uploaded' });
+            }
+            const config = CreateConfig(file.path)
+            axios(config)
         .then(async (result) => {
             try{
             const textFromOpenAI = await text2json(result.data.text)
-            console.log(textFromOpenAI)
+            console.log(typeof textFromOpenAI.choices[0].text)
+            mongo_connection(textFromOpenAI.choices[0].text)
             //console.log(result.data.text);
             }
             catch (err){
@@ -50,6 +88,11 @@ router.post('/', upload.single('file'), async (req, res) => {
         .catch(error => {
             console.error('Error:', error.response.data);
         });
+        });
+        
+
+
+        
     } 
     catch (error) {
         console.error('Error:', error.response ? error.response.data : error.message);

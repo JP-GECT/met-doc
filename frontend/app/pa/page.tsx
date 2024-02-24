@@ -17,7 +17,7 @@ const UploadForm: React.FC = () => {
     };
 
     const handleSubmit = async (event: any) => {
-        // event.preventDefault();
+        event.preventDefault();
 
         if (!file) {
             console.error('No file selected');
@@ -29,11 +29,11 @@ const UploadForm: React.FC = () => {
         formData.append('text', text);
 
         try {
-            await axios.post('http://localhost:3001/upload', formData, {
+            await axios.post('http://localhost:8000/transcribe', formData,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            });
+            } );
             console.log('File uploaded successfully');
             // Optionally, you can perform some action after successful upload
         } catch (error) {

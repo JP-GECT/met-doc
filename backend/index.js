@@ -1,11 +1,10 @@
 const transcribe = require('./voice2Text/voice2text.js')
-const mongo_connection = require('./mongo-connection/mongo-connection.js')
+// const mongo_connection = require('./mongo-connection/mongo-connection.js')
 const cors = require('cors')
-const multer = require('multer');
 
 
 
-mongo_connection();
+
 const express = require('express');
 const app = express();
 app.use(cors())
