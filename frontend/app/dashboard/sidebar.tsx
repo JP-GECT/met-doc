@@ -5,6 +5,7 @@ import { useRef } from "react";
 
 // import { projects } from "@/constants/projects";
 import { getProjectList } from "@/constants/getProjectList";
+import { useSharedData } from "@/app/store";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -16,12 +17,14 @@ const Sidebar = async ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const trigger = useRef<any>(null);
 
   const response = await getProjectList();
+  const { projects, setProjects } = useSharedData();
 
   if (response.isError) {
     return <div>Error</div>;
   }
 
-  const projects = response.data;
+  // const projects = response.data;
+  // setProjects(response.data);
 
   return (
     <aside
