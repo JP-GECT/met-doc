@@ -6,7 +6,7 @@ interface SharedState {
 }
 
 export const useSharedData = create<SharedState>((set) => ({
-  projects: {},
+  projects: [{_id: 1, project_name: "project", project_description: "description"}, {_id: 1, project_name: "project", project_description: "description"}],
   setProjects: (newProjects: any) =>
     // set((state) => ({ ...state, data: newProject })),
     set((state) => newProjects),

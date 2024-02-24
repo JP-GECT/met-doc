@@ -34,7 +34,7 @@ const UploadAudio = () => {
     formData.append("audioFile", file);
     formData.append("text", text);
     // formData.append("id", 1);
-    console.log(file);
+    // console.log(file);
 
     // try {
     //   const response = await fetch("http://localhost:8000/trans", {
@@ -76,12 +76,12 @@ const UploadAudio = () => {
         {/* <Button variant="outline">Upload Audio</Button> */}
         <Button
           variant="ghost"
-          className="rounded-full p-3 border-none"
+          className="rounded-full  border-none hover:bg-transparent z-50 "
         >
           {/* <ChevronUp /> */}
           {/* <ArrowUpSquare /> */}
           {/* <ArrowUp /> */}
-          <Mic className="h-16 w-16" />
+          <Mic className="h-16 w-16 text-white " />
           {/* Upload Audio */}
         </Button>
       </DialogTrigger>

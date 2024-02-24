@@ -1,36 +1,35 @@
-// "use client";
+ "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+// import { useRef } from "react";
 
 // import { projects } from "@/constants/projects";
 import { getProjectList } from "@/constants/getProjectList";
 import { useSharedData } from "@/app/store";
 
-interface SidebarProps {
-  sidebarOpen: boolean;
-  setSidebarOpen: (arg: boolean) => void;
-}
 
-const Sidebar = async ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
-  const sidebar = useRef<any>(null);
-  const trigger = useRef<any>(null);
 
-  const response = await getProjectList();
+const Sidebar =  () => {
+  // const sidebar = useRef<any>(null);
+  // const trigger = useRef<any>(null);
+
+  // const response = await getProjectList();
   const { projects, setProjects } = useSharedData();
 
-  if (response.isError) {
-    return <div>Error</div>;
-  }
+
+  // if (response.isError) {
+  //   return <div>Error</div>;
+  // }
 
   // const projects = response.data;
+  // const projects = [{project_name:"joseph",_id:3435,project_description:"ksajfklajsfkl"},{project_name:"joseph",_id:3435,project_description:"ksajfklajsfkl"},{project_name:"joseph",_id:3435,project_description:"ksajfklajsfkl"}];
   // setProjects(response.data);
 
   return (
     <aside
-      ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72 flex-col overflow-y-hidden bg-[#212b36] duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+     
+      className={`absolute left-0 top-0 z-9999 flex h-screen w-72 flex-col overflow-y-hidden bg-[#212b36] duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 
+        
       }`}
     >
       {/* ============================ Sidebar header============================ */}
@@ -41,15 +40,7 @@ const Sidebar = async ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         >
           Projects
         </Link>
-        <button
-          ref={trigger}
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          aria-controls="sidebar"
-          aria-expanded={sidebarOpen}
-          className="block lg:hidden text-white"
-        >
-          close
-        </button>
+      
       </div>
       {/* ============================ Sidebar header============================ */}
 
@@ -65,9 +56,9 @@ const Sidebar = async ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <span className="text-sm text-gray-400">description</span>
         </div> */}
 
-        {projects.map((project: any) => (
+        {projects.map((project: any, index: number) => (
           <div
-            key={project.id}
+            key={index}
             className="flex flex-col start justify-between px-6 py-3 text-white hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer"
           >
             <Link href={`/dashboard/${project._id}`}>{project.project_name}</Link>
