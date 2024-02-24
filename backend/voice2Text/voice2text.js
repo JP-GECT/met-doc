@@ -62,8 +62,8 @@ router.post('/', async (req, res) => {
             // File uploaded successfully
             const file = req.file;
             const text = req.body.text;
-            console.log('Uploaded file:', file);
-            console.log('Text:', text);
+            //console.log('Uploaded file:', file);
+            //console.log('Text:', text);
     
             // Here you can handle the uploaded file and text
             // For example, you can save the file to a database along with the text
@@ -77,7 +77,7 @@ router.post('/', async (req, res) => {
         .then(async (result) => {
             try{
             const textFromOpenAI = await text2json(result.data.text)
-            console.log(typeof textFromOpenAI.choices[0].text)
+            //console.log(typeof textFromOpenAI.choices[0].text)
             const json_data = JSON.parse(textFromOpenAI.choices[0].text)
             mongo_connection(json_data)
             //console.log(result.data.text);

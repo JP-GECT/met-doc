@@ -33,7 +33,7 @@ const text2json = async (text) => {
             temperature: 0,
             max_tokens: 500
         });
-        console.log(response)
+        //console.log(response)
         return response 
     }
     catch (error) {

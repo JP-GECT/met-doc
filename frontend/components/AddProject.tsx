@@ -27,8 +27,8 @@ interface AddProjectProps {
 
 export function AddProject({ text }: AddProjectProps) {
   const [data, setData] = useState<any>({
-    name: "",
-    description: "",
+    project_name: "",
+    project_description: "",
     team_leader: "",
   });
 
@@ -61,7 +61,7 @@ export function AddProject({ text }: AddProjectProps) {
         body: JSON.stringify(data),
       });
       console.log("Project created:", response);
-      console.log(response);
+      //console.log(response);
       console.log(typeof response);
     } catch (error) {
       console.error("Error creating project:", error);
@@ -95,8 +95,8 @@ export function AddProject({ text }: AddProjectProps) {
               Name
             </Label>
             <Input
-              id="name"
-              name="name"
+              id="project_name"
+              name="project_name"
               onChange={handleChange}
               // defaultValue="Project"
               placeholder="Project name"
@@ -111,8 +111,8 @@ export function AddProject({ text }: AddProjectProps) {
               Description
             </Label>
             <Input
-              id="description"
-              name="description"
+              id="project_description"
+              name="project_description"
               onChange={handleChange}
               // defaultValue="Description of the project"
               placeholder="Description of the project"
