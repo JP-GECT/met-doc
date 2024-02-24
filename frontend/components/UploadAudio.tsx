@@ -19,17 +19,24 @@ import AudioForm from "./AudioForm";
 const UploadAudio = () => {
   const [file, setFile] = useState(null);
 
-  const handleUpload = async () => {
-    // e.preventDefault();
-    // const formData = new FormData();
+  const handleUpload = async (e: any) => {
+    e.preventDefault();
+    console.log("Hi");
+    const formData = new FormData();
     // formData.append("audio", file);
+    // formData.append("id", 1);
     console.log(file);
 
     try {
-      const response = await fetch("http:/localhost:8000/transcribe", {
+      const response = await fetch("http://localhost:8000/transcribe", {
         method: "POST",
-        // body: formData,
-        body: JSON.stringify({ file: file, id: 1 }),
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: formData,
+        // body: JSON.stringify({ file: file, id: 1 }),
+        // body: JSON.stringify({ id: 1 }),
+        // body: JSON.stringify({ file: file }),
       });
 
       // Handle response
@@ -79,10 +86,12 @@ const UploadAudio = () => {
           <DialogClose asChild>
             <Button
               variant="ghost"
+              type="submit"
               // onClick={(e: any) => {
               //   console.log(file);
               // }}
               onClick={handleUpload}
+              // onSubmit={handleUpload}
             >
               Upload
             </Button>
