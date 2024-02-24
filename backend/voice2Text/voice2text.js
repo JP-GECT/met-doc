@@ -78,7 +78,8 @@ router.post('/', async (req, res) => {
             try{
             const textFromOpenAI = await text2json(result.data.text)
             console.log(typeof textFromOpenAI.choices[0].text)
-            mongo_connection(textFromOpenAI.choices[0].text)
+            const json_data = JSON.parse(textFromOpenAI.choices[0].text)
+            mongo_connection(json_data)
             //console.log(result.data.text);
             }
             catch (err){

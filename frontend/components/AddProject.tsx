@@ -53,7 +53,7 @@ export function AddProject({ text }: AddProjectProps) {
       //     // body: JSON.stringify(data),
       //   }
       // );
-      const response = await fetch("http://localhost:8000/createnewproject", {
+      const response = await fetch("http://localhost:8000/data/create-new-project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -140,16 +140,7 @@ export function AddProject({ text }: AddProjectProps) {
           <DialogClose asChild>
             <Button
               type="submit"
-              onClick={() => {
-                console.log(data);
-                projects.push({
-                  id: projects.length + 1,
-                  name: "new project",
-                  description: "new description",
-                  team_leader: "new team leader",
-                });
-                // console.log(projects);
-              }}
+              onClick={handleSave}
             >
               Save changes
             </Button>
