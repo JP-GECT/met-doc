@@ -22,7 +22,9 @@ const page = ({ params }: { params: { id: String } }) => {
         </div>
       </div>
       <div className="px-5 flex flex-col gap-5">
+        <SemiCircleChart />
         <ProjectTasks />
+
         <div className="flex gap-4">
           <div>
             <ProjectIssues />
