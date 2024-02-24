@@ -14,6 +14,7 @@ router.post('/create-new-project',async(req,res)=>{
     try{
         await mongoose.connect('mongodb://127.0.0.1:27017/metdoc');
         const bo = req.body
+        console.log(bo)
         const article = new Project({
             project_name: bo.project_name,
             project_description: bo.project_description,
@@ -43,5 +44,19 @@ router.get('/get-project/:id', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+router.get('/get-project-list',async(req,res)=>{
+  try {
+    await mongoose.connect('mongodb://127.0.0.1:27017/metdoc');
+    const data = await Project.find({},{_id:1,project_name:1,project_description:1})
+  // Query MongoDB to fetch data based on age
+  console.log(data)
+  console.log(typeof data)
+  res.send(data); // Send data as JSON response
+} catch (error) {
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+
+})
 
 module.exports = router

@@ -29,8 +29,8 @@ interface AddProjectProps {
 const AddProject = ({ text }: AddProjectProps) => {
   const router = useRouter();
   const [data, setData] = useState<any>({
-    name: "",
-    description: "",
+    project_name: "",
+    project_description: "",
     team_leader: "",
   });
 
@@ -55,18 +55,15 @@ const AddProject = ({ text }: AddProjectProps) => {
       //     // body: JSON.stringify(data),
       //   }
       // );
-      const response = await fetch(
-        "http://localhost:8000/data/create-new-project",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      console.log("Project created:");
-      console.log(response);
+      const response = await fetch("http://localhost:8000/data/create-new-project", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log("Project created:", response);
+      //console.log(response);
       console.log(typeof response);
       // const id = response._id;
       // router.push(`/dashboard/${id}`);
@@ -102,8 +99,8 @@ const AddProject = ({ text }: AddProjectProps) => {
               Name
             </Label>
             <Input
-              id="name"
-              name="name"
+              id="project_name"
+              name="project_name"
               onChange={handleChange}
               // defaultValue="Project"
               placeholder="Project name"
@@ -118,8 +115,8 @@ const AddProject = ({ text }: AddProjectProps) => {
               Description
             </Label>
             <Input
-              id="description"
-              name="description"
+              id="project_description"
+              name="project_description"
               onChange={handleChange}
               // defaultValue="Description of the project"
               placeholder="Description of the project"
