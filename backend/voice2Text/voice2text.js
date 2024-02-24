@@ -1,11 +1,9 @@
-const express = require('express');
 const axios = require('axios');
 const multer = require('multer');
 const fs = require('fs');
 const FormData = require('form-data')
 
 const app = express();
-const PORT = 8000;
 
 const api_key = process.env.OPENAI_API_KEY
 // Multer configuration
