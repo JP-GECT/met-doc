@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -33,6 +34,22 @@ export function AddProject({ text }: AddProjectProps) {
 
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSave = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/create", {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log("Project created:", response);
+      console.log(response);
+      console.log(typeof response);
+    } catch (error) {
+      console.error("Error creating project:", error);
+    }
   };
 
   return (
