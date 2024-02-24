@@ -12,14 +12,30 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { Button } from "./ui/button";
 import AudioForm from "./AudioForm";
 
 const UploadAudio = () => {
   const [file, setFile] = useState(null);
 
-  const handleUpload = () => {};
+  const handleUpload = async () => {
+    // e.preventDefault();
+    // const formData = new FormData();
+    // formData.append("audio", file);
+    console.log(file);
+
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        // body: formData,
+        body: JSON.stringify({ file: file }),
+      });
+
+      // Handle response
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
 
   return (
     <Dialog>

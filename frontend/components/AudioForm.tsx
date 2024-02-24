@@ -13,24 +13,24 @@ const AudioForm = ({ setFile }: AudioFormProps) => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    // const formData = new FormData();
-    // formData.append("audio", file);
-    // console.log(file);
+  // const handleSubmit = async (e: any) => {
+  // e.preventDefault();
+  // const formData = new FormData();
+  // formData.append("audio", file);
+  // console.log(file);
 
-    // try {
-    //   const response = await fetch("/api/upload", {
-    //     method: "POST",
-    //     body: formData,
-    // body: JSON.stringify({ file: file }),
-    //   });
+  // try {
+  //   const response = await fetch("/api/upload", {
+  //     method: "POST",
+  //     // body: formData,
+  // body: JSON.stringify({ file: file }),
+  //   });
 
-    //   // Handle response
-    // } catch (error) {
-    //   console.error("Error uploading file:", error);
-    // }
-  };
+  //   // Handle response
+  // } catch (error) {
+  //   console.error("Error uploading file:", error);
+  // }
+  // };
 
   return (
     <form>

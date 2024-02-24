@@ -16,15 +16,20 @@ import { Plus } from "lucide-react";
 import { projects } from "@/constants/projects";
 import { DialogClose } from "@radix-ui/react-dialog";
 
-export function AddProject() {
+interface AddProjectProps {
+  text?: String;
+}
+
+export function AddProject({ text }: AddProjectProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="rounded-full"
+          className="rounded-full flex gap-2"
         >
           <Plus />
+          {text}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
