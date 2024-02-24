@@ -9,6 +9,10 @@
   "author": "HackBytes",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "axios": "^1.6.7",
+    "express": "^4.18.2",
+    "form-data": "^4.0.0",
+    "multer": "^1.4.5-lts.1",
+    "openai": "^4.28.0"
   }
 }
