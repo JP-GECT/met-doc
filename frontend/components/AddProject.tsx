@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
+import { useRouter } from "next/router";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,14 +18,15 @@ import { Label } from "@/components/ui/label";
 
 import { Plus } from "lucide-react";
 
-import { projects } from "@/constants/projects";
+// import { projects } from "@/constants/projects";
 import { DialogClose } from "@radix-ui/react-dialog";
 
 interface AddProjectProps {
   text?: String;
 }
 
-export function AddProject({ text }: AddProjectProps) {
+// export default function AddProject({ text }: AddProjectProps) {
+const AddProject = ({ text }: AddProjectProps) => {
   const [data, setData] = useState<any>({
     name: "",
     description: "",
@@ -37,6 +38,8 @@ export function AddProject({ text }: AddProjectProps) {
   };
 
   const handleSave = async () => {
+    const router = useRouter();
+    router.push("/");
     // const formData = new FormData();
     // formData.append("name", data.name);
     // formData.append("description", data.description);
@@ -53,14 +56,17 @@ export function AddProject({ text }: AddProjectProps) {
       //     // body: JSON.stringify(data),
       //   }
       // );
-      const response = await fetch("http://localhost:8000/data/create-new-project", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      console.log("Project created:", response);
+      const response = await fetch(
+        "http://localhost:8000/data/create-new-project",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      console.log("Project created:");
       console.log(response);
       console.log(typeof response);
     } catch (error) {
@@ -149,4 +155,6 @@ export function AddProject({ text }: AddProjectProps) {
       </DialogContent>
     </Dialog>
   );
-}
+};
+
+export default AddProject;
