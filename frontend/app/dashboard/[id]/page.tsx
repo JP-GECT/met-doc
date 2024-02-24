@@ -5,7 +5,6 @@ import UploadAudio from "@/components/UploadAudio";
 import ProjectStats from "@/components/ProjectStats";
 import ProjectTasks from "@/components/ProjectTasks";
 import ProjectIssues from "@/components/ProjectIssues";
-import ProgressBar from "@/components/ProgressBar";
 import SemiCircleChart from "@/components/SemiCircleChart";
 
 const page = ({ params }: { params: { id: String } }) => {
