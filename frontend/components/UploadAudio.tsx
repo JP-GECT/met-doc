@@ -31,7 +31,7 @@ const UploadAudio = () => {
       return;
     }
     const formData = new FormData();
-    formData.append("audio", file);
+    formData.append("audioFile", file);
     formData.append("text", text);
     // formData.append("id", 1);
     console.log(file);
@@ -55,11 +55,11 @@ const UploadAudio = () => {
     // }
     try {
       const response = await axios.post(
-        "http://localhost:3001/upload",
+        'http://localhost:8000/transcribe',
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         }
       );

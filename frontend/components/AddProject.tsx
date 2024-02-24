@@ -41,18 +41,17 @@ export function AddProject({ text }: AddProjectProps) {
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("team_leader", data.team_leader);
+    console.log(data)
     try {
       const response = await axios.post(
-        "http://localhost:3001/create",
-        formData,
-        {
-          headers: {
-            // "Content-Type": "multipart/form-data",
-            "Content-Type": "multipart/form-data",
-          },
-          // body: JSON.stringify(data),
+        "http://localhost:8000/createnewproject",{
+          name:data.name,
+          description:data.description,
+          team_leader:data.team_leader
         }
-      );
+      ).then((res)=>{
+        console.log(res)
+      });
       console.log("Project created:", response);
       console.log(response);
       console.log(typeof response);
@@ -133,16 +132,7 @@ export function AddProject({ text }: AddProjectProps) {
           <DialogClose asChild>
             <Button
               type="submit"
-              onClick={() => {
-                console.log(data);
-                projects.push({
-                  id: projects.length + 1,
-                  name: "new project",
-                  description: "new description",
-                  team_leader: "new team leader",
-                });
-                // console.log(projects);
-              }}
+              onClick={handleSave}
             >
               Save changes
             </Button>
