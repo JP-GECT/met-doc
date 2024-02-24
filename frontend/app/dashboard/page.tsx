@@ -1,6 +1,6 @@
 "use client";
 // import { useState } from "react";
-import { AddProject } from "@/components/AddProject";
+import AddProject from "@/components/AddProject";
 import OverallStats from "@/components/OverallStats";
 
 // interface SidebarProps {
