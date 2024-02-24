@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronUp } from "lucide-react";
 
 import {
   Dialog,
@@ -25,22 +26,30 @@ const UploadAudio = () => {
     console.log(file);
 
     try {
-      const response = await fetch("/api/upload", {
+      const response = await fetch("http:/localhost:8000/transcribe", {
         method: "POST",
         // body: formData,
-        body: JSON.stringify({ file: file }),
+        body: JSON.stringify({ file: file, id: 1 }),
       });
 
       // Handle response
     } catch (error) {
       console.error("Error uploading file:", error);
+      console.log("Here");
     }
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Upload Audio</Button>
+        {/* <Button variant="outline">Upload Audio</Button> */}
+        <Button
+          variant="outline"
+          className="rounded-full flex gap-2"
+        >
+          <ChevronUp />
+          Upload Audio
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -70,9 +79,10 @@ const UploadAudio = () => {
           <DialogClose asChild>
             <Button
               variant="ghost"
-              onClick={(e: any) => {
-                console.log(file);
-              }}
+              // onClick={(e: any) => {
+              //   console.log(file);
+              // }}
+              onClick={handleUpload}
             >
               Upload
             </Button>

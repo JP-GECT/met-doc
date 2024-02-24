@@ -7,18 +7,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const StatCard = () => {
+interface StatCardProps {
+  title: string;
+  description: string;
+  content: string;
+  footer: string;
+}
+
+const StatCard = ({ title, description, content, footer }: StatCardProps) => {
   return (
     <Card className="min-w-[20vw]">
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <p className="font-extrabold text-2xl">{content}</p>
       </CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <p>{footer}</p>
       </CardFooter>
     </Card>
   );
