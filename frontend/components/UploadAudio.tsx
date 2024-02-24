@@ -1,7 +1,9 @@
 "use client";
 
+import axios from "axios";
+
 import { useState } from "react";
-import { ChevronUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 import {
   Dialog,
@@ -17,32 +19,50 @@ import { Button } from "./ui/button";
 import AudioForm from "./AudioForm";
 
 const UploadAudio = () => {
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [text, setText] = useState<string>("");
 
   const handleUpload = async (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log("Hi");
+    if (!file) {
+      console.error("No file selected");
+      return;
+    }
     const formData = new FormData();
-    // formData.append("audio", file);
+    formData.append("audio", file);
+    formData.append("text", text);
     // formData.append("id", 1);
     console.log(file);
 
-    try {
-      const response = await fetch("http://localhost:8000/trans", {
-        method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        body: formData,
-        // body: JSON.stringify({ file: file, id: 1 }),
-        // body: JSON.stringify({ id: 1 }),
-        // body: JSON.stringify({ file: file }),
-      });
+    // try {
+    //   const response = await fetch("http://localhost:8000/trans", {
+    //     method: "POST",
+    //     // headers: {
+    //     //   "Content-Type": "application/json",
+    //     // },
+    //     body: formData,
+    //     // body: JSON.stringify({ file: file, id: 1 }),
+    //     // body: JSON.stringify({ id: 1 }),
+    //     // body: JSON.stringify({ file: file }),
+    //   });
 
-      // Handle response
+    //   // Handle response
+    // } catch (error) {
+    //   console.error("Error uploading file:", error);
+    //   console.log("Here");
+    // }
+    try {
+      await axios.post("http://localhost:3001/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("File uploaded successfully");
+      // Optionally, you can perform some action after successful upload
     } catch (error) {
       console.error("Error uploading file:", error);
-      console.log("Here");
     }
   };
 
@@ -54,7 +74,9 @@ const UploadAudio = () => {
           variant="outline"
           className="rounded-full flex gap-2"
         >
-          <ChevronUp />
+          {/* <ChevronUp /> */}
+          {/* <ArrowUpSquare /> */}
+          <ArrowUp />
           Upload Audio
         </Button>
       </DialogTrigger>

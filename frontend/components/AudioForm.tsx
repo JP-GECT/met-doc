@@ -9,28 +9,15 @@ interface AudioFormProps {
 const AudioForm = ({ setFile }: AudioFormProps) => {
   // const [file, setFile] = useState(null);
 
-  const handleFileChange = (e: any) => {
-    setFile(e.target.files[0]);
-  };
-
-  // const handleSubmit = async (e: any) => {
-  // e.preventDefault();
-  // const formData = new FormData();
-  // formData.append("audio", file);
-  // console.log(file);
-
-  // try {
-  //   const response = await fetch("/api/upload", {
-  //     method: "POST",
-  //     // body: formData,
-  // body: JSON.stringify({ file: file }),
-  //   });
-
-  //   // Handle response
-  // } catch (error) {
-  //   console.error("Error uploading file:", error);
-  // }
+  // const handleFileChange = (e: any) => {
+  //   setFile(e.target.files[0]);
   // };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFile(event.target.files[0]);
+    }
+  };
 
   return (
     <form>
@@ -39,7 +26,6 @@ const AudioForm = ({ setFile }: AudioFormProps) => {
         onChange={handleFileChange}
         className=""
       />
-      {/* <button type="submit">Upload</button> */}
     </form>
   );
 };
