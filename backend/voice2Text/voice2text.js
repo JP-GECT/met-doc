@@ -1,9 +1,11 @@
 const express = require('express')
-
 const axios = require('axios');
 const multer = require('multer');
 const fs = require('fs');
 const FormData = require('form-data')
+
+const text2json  = require('../textToJson/t2j.js')
+    
 
 
 const api_key = process.env.OPENAI_API_KEY
@@ -22,11 +24,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
-router.get("/wiki", function (req, res) {
-  res.send("Wiki home page");
-});
-
 // Express route to handle file upload and API request
 router.post('/', upload.single('file'), async (req, res) => {
     try {
@@ -40,8 +37,15 @@ router.post('/', upload.single('file'), async (req, res) => {
         const config = CreateConfig(file.path)
 
         axios(config)
-        .then(result => {
-            console.log('Response:', result.data);
+        .then(async (result) => {
+            try{
+            const textFromOpenAI = await text2json(result.data.text)
+            console.log(textFromOpenAI)
+            //console.log(result.data.text);
+            }
+            catch (err){
+                console.error('Error', err)
+            }
         })
         .catch(error => {
             console.error('Error:', error.response.data);
